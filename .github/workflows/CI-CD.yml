@@ -17,7 +17,7 @@ jobs:
         with:
           java-version: 1.8  
       - name: Build, Test and Publish package (.war file) to GitHub
-        run: mvn -B deploy
+        run: mvn -B package
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}            
       - name: Deploy .war binary to a Tomcat in Amazon EC2
