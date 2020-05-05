@@ -27,5 +27,5 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
-          source: "target/petclinic.war"
-          target: "/home/fernando/apache-tomcat-8.5.54/webapps"
+          source: "/target/petclinic.war"
+          target: "/home/fernando"
