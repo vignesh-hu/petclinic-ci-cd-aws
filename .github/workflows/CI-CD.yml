@@ -27,5 +27,5 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
-          source: "/target/petclinic.war"
+          source: "target/petclinic.war"
           target: "/home/fernando"
