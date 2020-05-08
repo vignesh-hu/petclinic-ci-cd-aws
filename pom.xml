@@ -543,7 +543,7 @@
     <repository>
       <id>github</id>
       <name>GitHub Packages</name>
-      <url>https://maven.pkg.github.com/fernandolozano/petclinic-classic-ci-cd-aws</url>
+      <url>https://maven.pkg.github.com/wearearima/petclinic-classic-ci-cd-aws</url>
     </repository>
   </distributionManagement>
          
