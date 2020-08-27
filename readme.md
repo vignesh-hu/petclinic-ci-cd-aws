@@ -1,4 +1,4 @@
-# Sample Application
+# Sample Application's
 
 
 You can then access petclinic here: [http://localhost:8080/](http://localhost:8080/)
