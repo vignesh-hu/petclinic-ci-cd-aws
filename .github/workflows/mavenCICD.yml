@@ -25,7 +25,7 @@ jobs:
       - name: Build, Test and Publish package (.jar file) to GitHub
         run: mvn -B clean package
       - name: Create jar deployment package
-        run : jar cvfm mainmanifest.jar mymanifest -C src/ .
+        run : jar cvfm mainmanifest.jar -C src/*  .
            
       - name: Configure my AWS Credentils
         uses: aws-actions/configure-aws-credentials@v1
