@@ -1,5 +1,11 @@
 name: CI/CD
 
+env:
+  EB_PACKAGE_S3_BUCKET_NAME : "flask-github"
+  DEPLOY_PACKAGE_NAME       : "flask-app-${{ github.sha }}.jar"
+  AWS_REGION_NAME           : "us-east-1"
+  
+
 on:
   push:
     branches:
@@ -16,17 +22,22 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8  
-      - name: Build, Test and Publish package (.war file) to GitHub
+      - name: Build, Test and Publish package (.jar file) to GitHub
         run: mvn -B clean package
-        env:
-          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}            
-      - name: Deploy .war file to a Wildfly in Amazon EC2
-        uses: appleboy/scp-action@master
+      - name: Create jar deployment package
+        run : jar -r ${{ env.DEPLOY_PACKAGE_NAME }} ./  -x  *.git*
+           
+      - name: Configure my AWS Credentils
+        uses: aws-actions/configure-aws-credentials@v1
         with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          port: ${{ secrets.PORT }}
-          source: "target/petclinic.war"
-          target: "/home/root/wildfly/standalone/deplyments"
-          strip_components: 1
+             aws-access-key-id    : ${{ secrets.MY_AWS_ACCESS_KEY }}
+             aws-secret-access-key: ${{ secrets.MY_AWS_SECRET_KEY }}
+             aws-region           : ${{ env.AWS_REGION_NAME }}
+
+      - name: Copy our Deployment package to S3 bucket
+        run : aws s3 cp ${{ env.DEPLOY_PACKAGE_NAME }} s3://${{ env.EB_PACKAGE_S3_BUCKET_NAME}}/
+
+      - name: Print nice message on completion of CI Pipeline
+        run : echo "CI Pipeline part finished successfully"
+          
+     
