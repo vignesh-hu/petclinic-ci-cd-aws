@@ -1,7 +1,7 @@
 name: CI/CD
 
 env:
-  EB_PACKAGE_S3_BUCKET_NAME : "flask-github"
+  EB_PACKAGE_S3_BUCKET_NAME : "demo-bucket-cicd"
   DEPLOY_PACKAGE_NAME       : "flask-app-${{ github.sha }}.jar"
   AWS_REGION_NAME           : "us-east-1"
   
