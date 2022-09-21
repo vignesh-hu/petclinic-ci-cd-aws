@@ -16,16 +16,16 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix: 
-        java-version: [1.8]  
+        node-version: [12.x]
         
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0  
-      - name: Use java ${{ matrix.java-version }}
+      - name: Use java ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
-         java-version: ${{ matrix.java-version }}
+         java-version: ${{ matrix.node-version }}
       - run: git fetch origin master
       - run: npm install
       - run: npx create-nx-workspace@latest workspace.json
