@@ -28,7 +28,7 @@ jobs:
          java-version: ${{ matrix.node-version }}
       - run: git fetch origin master
       - run: npm install
-      - run: npx create-nx-workspace@latest workspace.json
+      - run: npx create-nx-workspace@latest
       - name: Run Affected Tests
         shell: bash
         run: npm run affected:test -- --base=remotes/origin/master
